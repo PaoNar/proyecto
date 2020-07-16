@@ -1,0 +1,110 @@
+type Curso{
+    _id: ID!
+    titulo: String
+    profesor: String
+    descripcion: String
+    genero: String
+    asistentes:[Estudiante] 
+}
+
+type Estudiante {
+    _id: ID!  
+    nombre: String
+    apellido: String
+    email: String
+    password: String
+    direccion: String
+    edad: String
+    foto: String
+}
+
+type User{
+  _id: ID!
+  email: String!
+  password: String!
+  token: String
+}
+
+type AuthData {
+  userId: ID!
+  token: String!
+  tokenExpiration: Int!
+}
+
+#Inputs
+input CursoInput{
+    titulo: String!
+    profesor: String!
+    descripcion: String!
+    genero: String!
+}
+
+input EstudianteInput{
+    nombre: String!
+    apellido: String!
+    email: String!
+    password: String
+    direccion: String!
+    edad: String!
+    # foto: String
+}
+
+input CursoEditaInput{
+    titulo: String
+    profesor: String
+    descripcion: String
+    genero: String
+    asistentes: [String]
+}
+
+input EstudianteEditaInput{
+    nombre: String
+    email: String
+}
+
+input UserInput{
+  email: String!
+  password: String!
+}
+
+input LoginInput{
+   email: String!
+   password: String! 
+}
+
+#Queries
+type Query {
+    hello: String
+    saludo: String
+    getCursos: [Curso]
+    getCurso(_id: ID!): Curso
+    getEstudiantes: [Estudiante]
+    getEstudiante(_id: ID!): Estudiante
+    
+    getUser(_id: ID!): User
+    getUsers: [User]
+}
+
+#Mutation
+type Mutation {
+    nuevoCurso(input: CursoInput!): Curso
+    editarCurso(_id: ID!, input: CursoEditaInput): Curso
+    eliminarCurso(_id: ID!): Boolean
+
+    nuevoEstudiante(input: EstudianteInput!): Estudiante
+    editarEstudiante(_id: ID!, input: EstudianteEditaInput): Estudiante
+    eliminarEstudiante(id: ID!): Boolean
+
+    nuevoUser(input: UserInput): User
+    editarUser(_id: ID!, input: UserInput): User
+    eliminarUser(_id: ID!): Boolean
+    
+    login(input: LoginInput!): User
+}
+
+
+
+
+
+
+
